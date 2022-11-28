@@ -12,6 +12,8 @@ server.use(cors())
 // sequelize.connect()
 server.use(express.json())
 
+//Commentaire de test d'envoie git
+
 server.get('/',(req, res) => {
     res.send('Hello motto!')
 })
