@@ -18,6 +18,7 @@ router.get("/books" , (req, res) => {
       res.json(results)
    }).catch(() => {
       res.json({arguments : "Error !! "})
+      console.log("toto")
    })
 })
 module.exports = router
