@@ -8,14 +8,16 @@ module.exports = (sequelize, DataTypes) => {
         } ,
         bookId: {
             type: DataTypes.INTEGER,
+            primaryKey: true,
             allowNull: false
         },
         libraryId : {
             type: DataTypes.INTEGER,
+            primaryKey: true,
             allowNull: false
         },
         read: {
-            type: DataTypes.BOOL,
+            type: DataTypes.BOOLEAN,
             allowNull: false
         }
     })
