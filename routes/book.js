@@ -15,7 +15,7 @@ router.get("/books" , (req, res) => {
    })
 })
 
-//create book
+
 router.post('/book' , (req, res) => {
    req.body.type = req.body.type.join()
    sequelize.Book.create(req.body).then(result => {
@@ -25,7 +25,7 @@ router.post('/book' , (req, res) => {
    })
 })
 
-// edit book
+
 router.put("/book/:id" , (req , res) =>{
    const bookId = req.params.id
    req.body.type = req.body.type.join()

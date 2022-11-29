@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const sequelize = require('../controllers/db/sequelize')
 
-router.get("/pages" , (req, res) => {
+router.get("/pages/:id" , (req, res) => {
     sequelize.Page.findAll().then(results => {
         results.forEach(element => {
-            element.type = element.type.split(',')
+            element.bookId = element.bookId.split(',')
         })
         res.json(results)
     }).catch(() => {
