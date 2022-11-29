@@ -16,7 +16,6 @@ router.get("/pages/:id" , (req, res) => {
 
 //create book
 router.post('/page' , (req, res) => {
-    req.body.type = req.body.type.join()
     sequelize.Page.create(req.body).then(result => {
         res.json({arguments: "Created successfully " , result})
     }).catch(() => {
