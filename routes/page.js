@@ -1,15 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../controllers/db/sequelize')
+const { Op } = require("sequelize");
 
 router.get("/pages/:id" , (req, res) => {
-    sequelize.Page.findAll().then(results => {
-        results.forEach(element => {
-            element.bookId = element.bookId.split(',')
-        })
-        res.json(results)
+    const livreId = req.params.id
+    sequelize.Page.findAll({
+        where: {
+            bookId: {
+                [Op.eq]: livreId
+            }
+        }
     }).catch(() => {
-        res.json({arguments : "Error !! "})
+        res.json({arguments: "Error !! "})
         console.log("toto")
     })
 })
