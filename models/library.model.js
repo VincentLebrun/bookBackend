@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         } ,
-        libraryName : {
+        libraryBook: {
             type: DataTypes.STRING,
             allowNull: false
         }

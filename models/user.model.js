@@ -5,6 +5,14 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        surName: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -19,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
         role: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        idLibrary: {
+            type: DataTypes.INTEGER,
+            allowNull : false
         }
 
     })
