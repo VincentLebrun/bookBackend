@@ -1,14 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../controllers/db/sequelize')
+const {Op} = require("sequelize");
 
 
-router.get("/booksLibrary" , (req, res) => {
-    sequelize.BookLibrary.findAll().then(results => {
-        results.forEach(element => {
-            element.read = element.read.split(',')
-        })
-        res.json(results)
+router.get("/booksLibrary/:id" , (req, res) => {
+    const idLibrary = req.params.id
+    let listeLivres = []
+    sequelize.BookLibrary.findAll({where:{libraryId:{[Op.eq]:idLibrary}}}).then(async results => {
+        for (let libraryLivre of results) {
+            await sequelize.Book.findByPk(libraryLivre.bookId).then(result => {
+                listeLivres.push(result)
+            })
+        }
+        res.json(listeLivres)
     }).catch(() => {
         res.json({arguments : "Error !! "})
         console.log("toto")
@@ -42,10 +47,16 @@ router.put("/booksLibrary/:id" , (req , res) =>{
     })
 })
 
-router.delete('/bookLibrarys/:id', (req, res) => {
+router.delete('/bookLibrarys/:id/:idLib', (req, res) => {
     const bookId = req.params.id
+    const idLib = req.params.idLib
     sequelize.BookLibrary.destroy({
-        where: {id : bookId}
+        where: {
+            [Op.and]:[
+                {bookId:bookId},
+                {libraryId:idLib}
+            ]
+        }
     }).then(() => {
         res.status(204).json({ message: "Deleted successfully " })
     }).catch(() => {

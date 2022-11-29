@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sequelize = require('../controllers/db/sequelize')
+const {Op} = require("sequelize");
 
 // Book List
 router.get("/books" , (req, res) => {
@@ -14,7 +15,6 @@ router.get("/books" , (req, res) => {
       console.log("toto")
    })
 })
-
 
 router.post('/book' , (req, res) => {
    req.body.type = req.body.type.join()
