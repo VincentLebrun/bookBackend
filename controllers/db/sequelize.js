@@ -6,10 +6,11 @@ const userModel = require('../../models/user.model')
 const sequelize = new Sequelize(
     'book', //nom de la base de données
     'root', //utilisateur
-    'root', //mot de passe
+    '', //mot de passe
     {
         host: 'localhost',
-        dialect: 'postgres'
+        port:'3305',
+        dialect: 'mysql'
     }
 );
 const Book = bookModel(sequelize , DataTypes)
