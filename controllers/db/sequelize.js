@@ -14,11 +14,18 @@ const sequelize = new Sequelize(
         dialect: 'mysql'
     }
 );
+const Library = libraryModel(sequelize, DataTypes)
 const Book = bookModel(sequelize , DataTypes)
 const User = userModel(sequelize, DataTypes)
 const Page = pageModel(sequelize, DataTypes)
 const BookLibrary = bookLibraryModel(sequelize, DataTypes)
-const Library = libraryModel(sequelize, DataTypes)
+
+
+Book.hasMany(BookLibrary,{foreignKey:"bookId"})
+BookLibrary.belongsTo(Book,{foreignKey:"bookId"})
+Library.hasMany(BookLibrary,{foreignKey:'libraryId'})
+BookLibrary.belongsTo(Library,{foreignKey:'libraryId'})
+
 const connect = () => {
     sequelize.authenticate().then(() =>{
         console.log('Connection Ok');

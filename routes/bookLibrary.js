@@ -7,13 +7,15 @@ const {Op} = require("sequelize");
 router.get("/booksLibrary/:id" , (req, res) => {
     const idLibrary = req.params.id
     let listeLivres = []
-    sequelize.BookLibrary.findAll({where:{libraryId:{[Op.eq]:idLibrary}}}).then(async results => {
-        for (let libraryLivre of results) {
-            await sequelize.Book.findByPk(libraryLivre.bookId).then(result => {
-                listeLivres.push(result)
-            })
-        }
-        res.json(listeLivres)
+    sequelize.BookLibrary.findAll({where:{libraryId:{[Op.eq]:idLibrary}},include:sequelize.Book}).then(async results => {
+        // for (let libraryLivre of results) {
+        //     await sequelize.Book.findByPk(libraryLivre.bookId).then(result => {
+        //         result.read = libraryLivre.read
+        //         listeLivres.push(result)
+        //     })
+        // }
+
+        res.json(results)
     }).catch(() => {
         res.json({arguments : "Error !! "})
         console.log("toto")

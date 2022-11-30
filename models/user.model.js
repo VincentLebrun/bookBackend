@@ -5,11 +5,11 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             autoIncrement: true
         },
-        name: {
+        firstname: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        surName: {
+        lastname: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         idLibrary: {
             type: DataTypes.INTEGER,
-            allowNull : true
+            allowNull : false
         }
 
     })
