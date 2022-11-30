@@ -7,11 +7,10 @@ const libraryModel = require('../../models/library.model')
 const sequelize = new Sequelize(
     'book', //nom de la base de données
     'root', //utilisateur
-    '', //mot de passe
+    'root', //mot de passe
     {
         host: 'localhost',
-        port:'3305',
-        dialect: 'mysql'
+        dialect: 'postgres'
     }
 );
 const Book = bookModel(sequelize , DataTypes)
