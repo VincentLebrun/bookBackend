@@ -47,10 +47,16 @@ router.put("/booksLibrary/:id" , (req , res) =>{
     })
 })
 
-router.delete('/bookLibrarys/:id', (req, res) => {
+router.delete('/bookLibrarys/:id/:idLib', (req, res) => {
     const bookId = req.params.id
+    const idLib = req.params.idLib
     sequelize.BookLibrary.destroy({
-        where: {id : bookId}
+        where: {
+            [Op.and]:[
+                {bookId:bookId},
+                {libraryId:idLib}
+            ]
+        }
     }).then(() => {
         res.status(204).json({ message: "Deleted successfully " })
     }).catch(() => {
