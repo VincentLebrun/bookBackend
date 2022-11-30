@@ -20,4 +20,23 @@ router.post('/login', async (req, res) => {
     }
 })
 
+router.post('/register',(req,res)=>{
+     bcrypt.hash(req.body.password,10).then(resultat =>{
+         req.body.password = resultat
+         console.log("tu es ici")
+         try{
+             sequelize.Library.create().then(result=>{
+                 req.body.idLibrary = result.id
+                 sequelize.User.create(req.body).then(result=>{
+                     res.json({Message:"User created", User:result})
+                 })
+             })
+
+         }
+         catch (e){
+             res.json(e)
+         }
+     })
+})
+
 module.exports = router
