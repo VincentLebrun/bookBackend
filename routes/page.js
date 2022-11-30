@@ -45,7 +45,7 @@ router.put("/page/:id" , (req , res) =>{
 })
 
 router.delete('/page/:id', (req, res) => {
-    const pagekId = req.params.id
+    const pageId = req.params.id
     sequelize.Page.destroy({
         where: {id : pageId}
     }).then(() => {
