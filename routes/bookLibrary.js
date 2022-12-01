@@ -32,20 +32,22 @@ router.post('/bookLibrary' , (req, res) => {
     })
 })
 
-router.put("/booksLibrary/:id" , (req , res) =>{
-    const bookId = req.params.id
+router.put("/booksLibrary/:id/" , (req , res) =>{
+    const pageId = req.params.id
+    const libraryId = req.body.libraryId
+    const bookId = req.body.bookId
 
     sequelize.BookLibrary.update(req.body,
         {
-            where : { id : {[Op.eq]:bookId}}
+            where : { [Op.and] : [{bookId : bookId},{libraryId:libraryId}] }
         }).then(() => {
-        sequelize.BookLibrary.findByPk(bookId).then(results => {
+        sequelize.BookLibrary.findByPk(pageId).then(results => {
             res.json({ message: "Modified successfully ", results })
         }).catch(() => {
-            res.json({ message: "Unable to fetch data" })
+            res.json({ message: "Error 1 !!" })
         })
     }).catch(() => {
-        res.json({ message: "Error !!" })
+        res.json({ message: "Error 2 !!" })
     })
 })
 
