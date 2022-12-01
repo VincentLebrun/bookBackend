@@ -31,7 +31,6 @@ router.post('/register',(req,res)=>{
                      res.json({Message:"User created", User:result})
                  })
              })
-
          }
          catch (e){
              res.json(e)

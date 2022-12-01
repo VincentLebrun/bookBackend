@@ -37,12 +37,12 @@ router.put("/booksLibrary/:id" , (req , res) =>{
 
     sequelize.BookLibrary.update(req.body,
         {
-            where : { id : bookId}
+            where : { id : {[Op.eq]:bookId}}
         }).then(() => {
         sequelize.BookLibrary.findByPk(bookId).then(results => {
             res.json({ message: "Modified successfully ", results })
         }).catch(() => {
-            res.json({ message: "Error !!" })
+            res.json({ message: "Unable to fetch data" })
         })
     }).catch(() => {
         res.json({ message: "Error !!" })
